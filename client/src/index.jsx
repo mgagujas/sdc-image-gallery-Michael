@@ -7,13 +7,14 @@ class App extends React.Component {
   constructor(props) {
     super(props);
       this.state = {
-        photos: [
+        
+        photos: [ // blurred out photo placeholders till fetch completes
           {url:'https://i1.wp.com/angularscript.com/wp-content/uploads/2018/06/Progressively-Loading-Images-With-Blur-Effect-min.png?w=800&ssl=1.jpg'},
           {url:'https://i1.wp.com/angularscript.com/wp-content/uploads/2018/06/Progressively-Loading-Images-With-Blur-Effect-min.png?w=800&ssl=1.jpg'},
           {url:'https://i1.wp.com/angularscript.com/wp-content/uploads/2018/06/Progressively-Loading-Images-With-Blur-Effect-min.png?w=800&ssl=1.jpg'},
           {url:'https://i1.wp.com/angularscript.com/wp-content/uploads/2018/06/Progressively-Loading-Images-With-Blur-Effect-min.png?w=800&ssl=1.jpg'},
           {url:'https://i1.wp.com/angularscript.com/wp-content/uploads/2018/06/Progressively-Loading-Images-With-Blur-Effect-min.png?w=800&ssl=1.jpg'}
-        ],
+        ], 
         id: null,
         showGallery: false // will toggle modal visibility
       }
@@ -37,7 +38,6 @@ class App extends React.Component {
 
   render() {
     let photos = this.showGallery ? this.state.photos : this.state.photos.slice(0,5);
-    console.log(photos);
 
     return (
       <div className="photoGallery">

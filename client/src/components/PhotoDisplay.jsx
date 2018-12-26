@@ -1,8 +1,7 @@
 import React from 'react';
-// import PhotoEntry from './PhotoEntry.jsx';
 
-var PhotoDisplay = (props) => {
-var showGallery = props.showGallery; //boolean - default: false
+const PhotoDisplay = (props) => {
+let showGallery = props.showGallery; //boolean - default: false
 
   return (
     <div className="photolayer">
