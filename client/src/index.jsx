@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PhotoDisplay from './components/PhotoDisplay.jsx';
 import styles from '../dist/styles.css';
-
+//test 
 class App extends React.Component {
   constructor(props) {
     super(props);
