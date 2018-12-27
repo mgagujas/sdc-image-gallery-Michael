@@ -6,7 +6,7 @@ db.once('open', function callback () {
   console.log('Connected To Mongo Database');
 })
 
-let listingSchema = mongoose.Schema({
+const listingSchema = mongoose.Schema({
   _id: String,
   photo: [{
     url: String,
@@ -14,9 +14,9 @@ let listingSchema = mongoose.Schema({
     }]
 });
 
-let Listing = mongoose.model('Listing', listingSchema);
+const Listing = mongoose.model('Listing', listingSchema);
 
-let getPhotosById = (id, callback) => {
+const getPhotosById = (id, callback) => {
   Listing.findOne({_id: id}, (err, entry) => {
     if (err) {
       callback(err);
