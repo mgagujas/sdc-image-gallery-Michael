@@ -1,17 +1,10 @@
 import React from 'react';
 
-const PhotoDisplay = (props) => {
-let showGallery = props.showGallery; //boolean - default: false
+const PhotoDisplay = ({photo, index, showGallery, toggleGallery}) => {
 
   return (
-    <div className="photolayer">
-      {showGallery ? 
-        (
-          <p>toggled true</p> // place holder for modal
-        ):(
-          <img className="photos" id={`image${props.index}`} src={props.photo} />
-        ) 
-      }
+    <div className="photoDiv">
+      <img className="photos" id={`image${index}`} src={photo} onClick={toggleGallery} />
     </div>
   )
 }
