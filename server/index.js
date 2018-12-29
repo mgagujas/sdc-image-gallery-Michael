@@ -11,8 +11,12 @@ app.use(bodyParser.json());
 
 app.get(`/rooms/:id/photos`, (req, res) => {
   var id = req.params.id;
-  model.getPhotosById(id, (response) => {
-    res.end(JSON.stringify(response));
+  model.getPhotosById(id, (err, response) => {
+    if (err) {
+      res.status(501).send();
+    } else {
+      res.end(JSON.stringify(response));
+    }
   })
 })
 
