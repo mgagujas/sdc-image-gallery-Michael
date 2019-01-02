@@ -2,74 +2,86 @@ import React from 'react';
 import PhotoCarousel from './PhotoCarousel.jsx';
 
 class PhotoGallery extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
+    let { clickIndex, photos, toggleGallery, length, showList, lightMode } = this.props;
     this.state = {
-      clickIndex: this.props.clickIndex,
-      photos: this.props.photos,
-      toggleGallery: this.props.toggleGallery,
-      length: this.props.photos.length - 1,
-      showList: true
-    }
+      clickIndex: clickIndex,
+      photos: photos,
+      toggleGallery: toggleGallery,
+      length: photos.length - 1,
+      showList: true,
+      lightMode: false,
+    };
   }
 
   projectUpTop(e) {
     e.preventDefault();
-    this.setState({clickIndex: Number(e.target.id)});
+    this.setState({ clickIndex: Number(e.target.id) });
   }
 
   showOrHideList(e) {
     e.preventDefault();
-    this.setState({showList: !this.state.showList});
+    const { showList } = this.state;
+    this.setState({ showList: !showList });
   }
 
-  handleMouseHover(e) {
+  changeBackgroundColor(e) {
     e.preventDefault();
-    this.setState({showList: true});
+    const { lightMode } = this.state;
+    this.setState({ lightMode: !lightMode });
   }
 
   previous() {
-    let {clickIndex, length} = this.state;
+    const { clickIndex, length } = this.state;
     if (clickIndex !== 0) {
-      let newIndex = clickIndex - 1;
-      this.setState({clickIndex: newIndex});
+      const newIndex = clickIndex - 1;
+      this.setState({ clickIndex: newIndex });
     } else {
-      this.setState({clickIndex: length});
+      this.setState({ clickIndex: length });
     }
   }
 
   forward() {
-    let {clickIndex, length} = this.state;
+    const { clickIndex, length } = this.state;
     if (clickIndex !== length) {
-      let newIndex = clickIndex + 1;
-      this.setState({clickIndex: newIndex});
+      const newIndex = clickIndex + 1;
+      this.setState({ clickIndex: newIndex });
     } else {
-      this.setState({clickIndex: 0});
+      this.setState({ clickIndex: 0 });
     }
   }
 
   render() {
-    let {clickIndex, photos, toggleGallery, length, showList} = this.state;
+    const {
+      clickIndex, photos, toggleGallery, length, showList, lightMode,
+    } = this.state;
 
     return (
-        <div className="modal">
-          <div className="modal-content">
-            <span className="closeBtn" onClick={toggleGallery}>&times;</span>
-            <div className="mainDisplay">
-              <h1 className="Btn" id="back" onClick={this.previous.bind(this)} value="back">{`<`}</h1>
-              <img id="leadImage" src={photos[clickIndex].url}/>
-              <h1 className="Btn" id="forward" onClick={this.forward.bind(this)} value="forward">{`>`}</h1>
-            </div>
-            <div className="description" >
-              <p className="caption">{`${clickIndex+1}/${length+1} ${photos[clickIndex].caption}`}</p>
-              <p className="showList" onClick={this.showOrHideList.bind(this)} >{showList ? "Hide photo list" : "Show photo list"}</p>
-            </div>
-            <div className="photo-carousel">
-              {showList && photos.map((photo, index) => <PhotoCarousel photo={photo} key={index} index={index} projectUpTop={this.projectUpTop.bind(this)} clickIndex={this.state.clickIndex}/>)}
-            </div>
+      <div className="modal" id={lightMode ? 'lightMode' : 'modal'}>
+        <div className="modal-content" id={lightMode ? 'lightModeX' : 'modal-content'}>
+          <span className="closeBtn" onClick={toggleGallery}>&times;</span>
+          <div className="mainDisplay">
+            <h1 className="btn" id="back" onClick={this.previous.bind(this)} value="back">{'<'}</h1>
+            <img id="leadImage" src={photos[clickIndex].url} onClick={this.forward.bind(this)} />
+            <h1 className="btn" id="forward" onClick={this.forward.bind(this)} value="forward">{'>'}</h1>
+          </div>
+          <div className="description">
+            <p className="caption">{`${clickIndex + 1}/${length + 1}: ${photos[clickIndex].caption}`}</p>
+            <p className="showList" onClick={this.showOrHideList.bind(this)}>{showList ? 'hide photo list' : 'show photo list'}</p>
+          </div>
+          <div className="photo-carousel" id={showList ? 'showCarousel' : null}>
+            {photos.map((photo, index) => <PhotoCarousel photo={photo} key={index} index={index} projectUpTop={this.projectUpTop.bind(this)} clickIndex={this.state.clickIndex} />)}
+          </div>
+          <div className="lighting">
+            {lightMode
+              ? <img id="lightbulb" src="https://s3-us-west-1.amazonaws.com/fec-errbnb/lightbulb_on.png" onClick={this.changeBackgroundColor.bind(this)} />
+              : <img id="lightbulb" src="https://s3-us-west-1.amazonaws.com/fec-errbnb/lightbulb.png" onClick={this.changeBackgroundColor.bind(this)} />
+            }
           </div>
         </div>
-    )
+      </div>
+    );
   }
 }
 

@@ -1,7 +1,5 @@
 .body {
-  /* position: relative;
-  margin-left: auto;
-  margin-right: auto; */
+  display: absolute;
 }
 
 .body::-webkit-scrollbar {
@@ -13,9 +11,10 @@
   flex-direction: row;
   float: none;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 0;
+  margin-right: 0;
   position: relative;
+  width: 100vw;
 }
 
 #col-1,
@@ -52,6 +51,7 @@
   opacity: 1;
   float: left;
   clear: none;
+  transition: 1s ease;
 }
 
 .photoDisplay:hover .photos {
@@ -76,7 +76,7 @@
 
 #image0 {
   height: 50.2vh;
-  /* width: 50vw; */
+  width: 50vw;
 }
 
 #image1,
@@ -84,7 +84,7 @@
 #image3,
 #image4 {
   height: 25vh;
-  /* width: 25vw; */
+  width: 25vw;
 }
 
 /* MODAL */
@@ -97,26 +97,34 @@
   height: 100%;
   width: 100%;
   overflow: auto;
-  background:rgba(28.2,28.2,28.2,0.4)
+  background:rgba(28.2,28.2,28.2, 0.8);
+  transition: 1.5s ease;
 }
 
 .modal-content {
   margin: auto;
-  font-family: "Helvetica Neue";
-  font-size: 18px;
+  font-family: "Helvetica";
+  font-size: 14px;
   font-weight: 200;
   color: rgb(255, 255, 255, 1);
   line-height: 1.43;
-  width: 90%;
+  width: 95%;
 }
 
-.Btn {
+#lightMode {
+  transition: 1.5s ease;
+  background: rgba(142, 142, 142, 0.75);
+}
+
+.btn {
   margin-top: auto;
   margin-bottom: auto;
   font-family: "Helvetica Neue";
   font-size: 50px;
   font-weight: 150;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 1);
+  cursor: pointer;
+  user-select: none;
 }
 
 .closeBtn {
@@ -124,10 +132,13 @@
   font-size: 50px;
   margin-top: -100px;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 1);
+  font-weight: lighter;
+  cursor: pointer;
+  user-select: none;
 }
 
 .mainDisplay {
-  margin-top: 105px;
+  margin-top: 90px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -140,7 +151,8 @@
   margin-left: auto;
   margin-right: auto;
   top: 50%;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.8), 0 1px 4px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 1px 20px rgba(0, 0, 0, 0.8), 0 1px 16px rgba(0, 0, 0, 0.8);
+  cursor: pointer;
 }
 
 .description {
@@ -148,7 +160,32 @@
   flex-direction: row;
   justify-content: space-between;
   padding-top: 20px;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 1);
+  width: 98%;
+  margin-left: auto;
+  margin-right: auto;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 1);
+}
+
+.lighting {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+#lightbulb {
+  height: 3.5vh;
+  padding-top: 5px;
+  position: fixed;
+}
+
+.lightMode {
+  cursor: pointer;
+  user-select: none;
+}
+
+.showList {
+  cursor: pointer;
+  user-select: none;
 }
 
 .photo-carousel {
@@ -159,9 +196,17 @@
   width: 100%;
   overflow-x: scroll;
   overflow-y: hidden;
-  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 1s ease-out;
+  margin-left: auto;
+  margin-right: auto;
+  pointer-events: none;
+}
+
+#showCarousel {
   opacity: 1;
   transition: opacity 1s ease;
+  pointer-events: auto;
 }
 
 .photo-carousel::-webkit-scrollbar {
@@ -170,6 +215,7 @@
 
 .photoFrame {
   padding-right: 12px;
+  cursor: pointer;
 }
 
 .photoEntry {
@@ -177,7 +223,8 @@
   width: 100px;
   height: 67px;
   vertical-align: middle;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.8), 0 1px 4px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.8), 0 1px 10px rgba(0, 0, 0, 0.8);
+  transition: .5s ease;
 }
 
 .photoEntryFocus {
@@ -185,8 +232,9 @@
   width: 100px;
   height: 67px;
   vertical-align: middle;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 1), 0 1px 10px rgba(0, 0, 0, 1);
+  box-shadow: 0 1px 20px rgb(25, 40, 252), 0 1px 24px rgb(255, 255, 255);
   opacity: 1;
+  transform: scale(1.05);
 }
 
 /* MODAL HOVER */
@@ -211,33 +259,47 @@
   transition-delay: 0s, 0s, 0s;
 }
 
-/* BUTTON */
+.modal:hover .photoDisplay{
+  opacity: 0;
+}
+
+/* BUTTONS */
 
 .body:hover #viewPhotosBtn {
   opacity: 1;
-  transition: opacity .9s ease;
+  transition: opacity 3s ease;
+  z-index: 1;
+}
+
+#viewPhotosBtn:hover a {
+  background:rgba(28.2,28.2,28.2,0.5);
+  transition-delay: .18s;
+  cursor: pointer;
+  z-index: 1;
 }
 
 #viewPhotosBtn {
-  display: flex;
-  position: fixed;
-  width: 25vh;
-  left: 10vw;
-  top: 22vh;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
   text-align: center;
+  font-size: 18px;
   opacity: 0;
-  transition: opacity .9s ease;
+  transition: opacity 1s ease;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 1);
+  z-index: -2;
+  user-select: none;
+  cursor: default;
 }
 
 #viewPhotosBtn a{
-  display: flex;
-  position: fixed;
   padding: 2vh 3vw;
   text-align: center;
   color: white;
   border: solid 2px white;    
   font-size: 1.4vw;
-  z-index: 1;
+  z-index: -2;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
   text-shadow: 0 1px 4px rgba(0, 0, 0, 1);
 }
