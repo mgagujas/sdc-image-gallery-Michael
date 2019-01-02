@@ -19,9 +19,9 @@ const Listing = mongoose.model('Listing', listingSchema);
 const getPhotosById = (id, callback) => {
   Listing.findOne({_id: id}, (err, entry) => {
     if (err) {
-      callback(err);
+      callback(err, null);
     } else {
-      callback(entry);
+      callback(null, entry);
     }
   })
 };

@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PhotoDisplay from './components/PhotoDisplay.jsx';
 import PhotoGallery from './components/PhotoGallery.jsx';
-import PhotoCarousel from './components/PhotoCarousel.jsx';
 import styles from '../dist/styles.css';
 
 class App extends React.Component {
@@ -17,7 +16,7 @@ class App extends React.Component {
           {url:'https://i1.wp.com/angularscript.com/wp-content/uploads/2018/06/Progressively-Loading-Images-With-Blur-Effect-min.png?w=800&ssl=1.jpg'}
         ], 
         id: null,
-        showGallery: false, // will toggle modal visibility
+        showGallery: false,
         clickIndex: null
       }
   }
@@ -46,28 +45,32 @@ class App extends React.Component {
       this.setState({clickIndex: index})
     }
     this.setState({showGallery: !this.state.showGallery});
-    //needs to pop up modals
   }
 
+
   render() {
-    let photos = this.state.photos;
-    let showGallery = this.state.showGallery;
+    let {photos, showGallery} = this.state;
 
     return (
-      <div>
+      <div className="body" >
         <div className="photoDisplay">
             <div id="col-1">
-              <PhotoDisplay photo={photos[0].url} index={0} showGallery={this.state.showGallery} toggleGallery={this.toggleGallery.bind(this)}/>
+              <PhotoDisplay photo={photos[0].url} index={0} showGallery={showGallery} toggleGallery={this.toggleGallery.bind(this)}/>
             </div>
             <div id="col-2">
-              <PhotoDisplay photo={photos[1].url} index={1} showGallery={this.state.showGallery} toggleGallery={this.toggleGallery.bind(this)}/>
-              <PhotoDisplay photo={photos[2].url} index={2} showGallery={this.state.showGallery} toggleGallery={this.toggleGallery.bind(this)}/>
+              <PhotoDisplay photo={photos[1].url} index={1} showGallery={showGallery} toggleGallery={this.toggleGallery.bind(this)}/>
+              <PhotoDisplay photo={photos[2].url} index={2} showGallery={showGallery} toggleGallery={this.toggleGallery.bind(this)}/>
             </div>
             <div id="col-3">
-              <PhotoDisplay photo={photos[3].url} index={3} showGallery={this.state.showGallery} toggleGallery={this.toggleGallery.bind(this)}/>
-              <PhotoDisplay photo={photos[4].url} index={4} showGallery={this.state.showGallery} toggleGallery={this.toggleGallery.bind(this)}/>
+              <PhotoDisplay photo={photos[3].url} index={3} showGallery={showGallery} toggleGallery={this.toggleGallery.bind(this)}/>
+              <PhotoDisplay photo={photos[4].url} index={4} showGallery={showGallery} toggleGallery={this.toggleGallery.bind(this)}/>
             </div>
         </div>
+       
+        <div id="viewPhotosBtn" onClick={this.toggleGallery.bind(this)}>
+          <a>View More</a>
+        </div>
+
         <div className="photoGallery">
           {showGallery && (<PhotoGallery photos={photos} toggleGallery={this.toggleGallery.bind(this)} clickIndex={this.state.clickIndex} showGallery={this.state.showGallery}/>)}
         </div>
