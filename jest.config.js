@@ -6,7 +6,7 @@ module.exports = {
   collectCoverageFrom: ['<rootDir>/client/src/**/*.{js,jsx,mjs}'],
 
   // The directory where Jest should output its coverage files
-
+  coverageDirectory: 'coverage',
   // An array of file extensions your modules use
   moduleFileExtensions: ['js', 'json', 'jsx'],
 
