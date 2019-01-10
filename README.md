@@ -4,10 +4,18 @@
 
 ## Related Projects
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+  - https://github.com/SDC-4Head/sdc-recommends
+  - https://github.com/SDC-4Head/sdc-reviews
+  - https://github.com/SDC-4Head/sdc-image-gallery2
+
+## API Routes
+
+|            Route           |  Method |           Description           |
+| -------------------------- | ------- | ------------------------------- |
+| /rooms/:id/photos          |   GET   | Gets photos for a home          |
+| /rooms/:id/photos          |   POST  | Adds photo to home's photos     |
+| /rooms/:id/photos/:photoid |  PATCH  | Updates a photo caption or image|
+| /rooms/:id/photos/:photoid |  DELETE | Deletes a photo                 |
 
 ## Table of Contents
 
