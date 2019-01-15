@@ -53,4 +53,3 @@ var createPhoto = function(i) {
 }
 createHome(0);
 createPhoto(0);
-// createHome(0);
