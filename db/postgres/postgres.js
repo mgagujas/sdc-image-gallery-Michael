@@ -19,7 +19,7 @@ const getPhotos = (houseId) => {
     pool.connect((err, client, release) => {
       if (err) { reject(err); }
       const query = `SELECT * FROM photos WHERE house_id = ${houseId};`;
-      client.query(query, (err, result) => {
+      pool.query(query, (err, result) => {
         release();
         if (err) { reject(err); }
         resolve(result.rows);
