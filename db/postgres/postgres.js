@@ -5,6 +5,7 @@ const pool = new Pool({
   host: '54.193.82.245',
   database: 'img_carousel',
   password: '$poweruserpassword',
+  port: 5432,
 });
 
 pool.on('error', (err, client) => {
