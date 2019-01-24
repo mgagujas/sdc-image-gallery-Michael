@@ -1,5 +1,4 @@
 DROP DATABASE IF EXISTS img_carousel;
-
 CREATE DATABASE img_carousel;
 
 \c img_carousel;
@@ -18,6 +17,6 @@ CREATE TABLE IF NOT EXISTS photos (
   url TEXT,
   views INT
 );
-
+CREATE INDEX houseidindex on photos(house_id);
 COPY houses (house_id, name) FROM '/Users/Mikey/SDC/SDCservice/sdc-image-gallery-Michael/db/homes.csv' DELIMITER ',' CSV;
 COPY photos (house_id, photo_id, caption, size, time_created, title, url, views) FROM '/Users/Mikey/SDC/SDCservice/sdc-image-gallery-Michael/db/photos.csv' DELIMITER ',' CSV;

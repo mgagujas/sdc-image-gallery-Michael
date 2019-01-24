@@ -23,18 +23,17 @@ class Gallery extends React.Component {
 
   componentDidMount() {
     let url = window.location.href.split('/');
-    this.state.id = url[url.indexOf('rooms')] === undefined ? 0 : url[url.indexOf('rooms') + 1];
-    console.log(this.state.id);
+    this.state.id = url[url.indexOf('rooms')] === undefined ? 1 : url[url.indexOf('rooms') + 1];
     this.fetchPhotos();
   }
 
   fetchPhotos() {
     fetch(`/rooms/${this.state.id}/photos`)
-      .then((response) => {
+      .then(function(response) {
         return response.json();
       })
       .then((body) => {
-        this.setState({photos: body.photo});
+        this.setState({photos: body});
       });
   }
 
@@ -76,7 +75,6 @@ class Gallery extends React.Component {
       </div>
     );
   }
-
 }
 
 export default Gallery;
