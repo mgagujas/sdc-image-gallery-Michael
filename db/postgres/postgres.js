@@ -94,7 +94,7 @@ const getPhotos = (houseId) => {
 };
 const client = new Pool({
   user: 'power_user',
-  host: '54.193.82.245',
+  host: '54.183.14.101',
   database: 'img_carousel',
   password: '$poweruserpassword',
 });
